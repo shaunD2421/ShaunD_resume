@@ -23,13 +23,108 @@
       .ds-numbervalulist li { margin-bottom: 20px; }
       .ds-subheading { display: block; font-weight: 600; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; color: #373737; margin: 30px 0 4px; }
       .ds-note { font-size: 15px; line-height: 26px; font-weight: 300; color: #6b6b6b; margin-top: 4px; }
-      .ds-contact-list { list-style: none; padding: 0; margin: 0; }
-      .ds-contact-list li { margin-bottom: 12px; }
+      .ds-contact-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 14px 48px; }
+      .ds-contact-list li { margin: 0; }
       .ds-contact-list a { color: #FFF; font-size: 18px; letter-spacing: 0.5px; }
       .ds-contact-list a:hover { color: #F26464; }
+      /* main.css leaves a large dead gap under the footer heading block */
+      .ds-footer { padding: 90px 0 70px; }
+      .ds-footer section { padding-bottom: 0; }
+      .ds-footer section p { margin-bottom: 30px; }
+      .ds-copyright { display: block; padding-top: 46px; }
+
+      /* Four stats read as an even 2x2 block rather than wrapping 2 / 1 / 1 */
+      .ds-numbervalulist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 40px; }
+      .ds-numbervalulist li { margin-right: 0; }
       .ds-skip { position: absolute; left: -9999px; }
       .ds-skip:focus { position: static; display: inline-block; padding: 8px 16px; }
       a:focus-visible, .ds-social li a:focus-visible { outline: 2px solid #F26464; outline-offset: 3px; }
+
+      /* ---------- Responsive refinements ---------- */
+      html, body { max-width: 100%; overflow-x: hidden; }
+      img, figure img { display: block; }
+      .ds-banner figure img { width: 100%; border-radius: 6px; }
+      /* The header is fixed. main.js offsets the banner with inline JS, which
+         breaks if jQuery is slow or blocked, so the clearance is done in CSS
+         instead and the JS value is overridden. */
+      .ds-banner { margin-top: 0 !important; padding-top: 196px; }
+      @media (max-width: 991px) { .ds-banner { padding-top: 108px; } }
+      @media (max-width: 768px) { .ds-banner { padding-top: 76px; } }
+
+      /* main.css targets .col-12, but the markup uses col-md-*, so stacked
+         cards had no gap on small screens. This restores it. */
+      @media (max-width: 991px) {
+        .ds-experience-list > [class*="col-"] { margin-bottom: 34px; }
+        .ds-skills-section .row > [class*="col-"] { margin-bottom: 34px; }
+        .ds-experience-list section { padding-right: 0; }
+      }
+
+      /* Tablet */
+      @media (min-width: 769px) and (max-width: 991px) {
+        .ds-header, .ds-header.ds-fixed-header { padding: 22px 0; }
+        .ds-banner section { padding-left: 0; padding-right: 0; padding-top: 34px; }
+        .ds-banner section h1 { font-size: 38px; line-height: 48px; }
+        .ds-about-section-custom { padding: 50px 0 30px; }
+        .ds-skills-section, .ds-experience-section { padding-bottom: 60px; }
+      }
+
+      /* Phone */
+      @media (max-width: 768px) {
+        .ds-header, .ds-header.ds-fixed-header { padding: 14px 0; }
+        .ds-logo { font-size: 13px; letter-spacing: 2px; }
+        .ds-logo span { width: 32px; height: 32px; font-size: 18px; margin-right: 10px; }
+        .ds-social li { margin-left: 8px; }
+        .ds-social li a { width: 34px; height: 34px; font-size: 17px; }
+
+        .ds-banner { padding-left: 0; padding-right: 0; }
+        .ds-banner figure { padding: 18px 0 4px; }
+        .ds-banner section { padding-left: 0; padding-right: 0; }
+        .ds-banner section h1 { font-size: 27px; line-height: 36px; }
+        .ds-banner section h1 span { font-size: 13px; padding-bottom: 6px; }
+
+        /* Stats read better two-up than as a cramped single column */
+        .ds-numbervalulist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 14px; margin-top: 24px !important; }
+        .ds-numbervalulist li { margin: 0; }
+        .ds-numbervalulist strong { font-size: 23px; line-height: 28px; }
+        .ds-numbervalulist span { font-size: 12px; line-height: 17px; letter-spacing: 0.3px; }
+
+        .ds-about-section-custom { padding: 34px 0 10px; }
+        .ds-about-section-custom p { font-size: 15px; line-height: 27px; margin-bottom: 16px; }
+        .ds-heading { font-size: 14px; margin-bottom: 16px; }
+
+        .ds-skills-list { margin-top: 6px; }
+        .ds-skills-list li { font-size: 13px; padding: 7px 13px; margin-right: 8px; margin-bottom: 8px; }
+        .ds-subheading { margin: 22px 0 2px; font-size: 12px; }
+
+        .ds-skills-section, .ds-experience-section { padding-bottom: 34px; }
+        .ds-officename { font-size: 20px; margin-bottom: 6px; }
+        span.ds-year { font-size: 12px; padding-bottom: 6px; }
+        span.ds-department { font-size: 15px; padding-bottom: 10px; }
+        .ds-experience-list ul { padding-top: 6px; }
+        .ds-experience-list ul li { font-size: 15px; line-height: 24px; margin-bottom: 12px; padding-left: 20px; }
+        .ds-experience-list ul li:before { top: 9px; width: 6px; height: 6px; }
+        .ds-note { font-size: 14px; line-height: 24px; }
+
+        .ds-footer { padding: 44px 0 34px; }
+        .ds-footer section { padding-bottom: 8px; }
+        .ds-footer section span { font-size: 13px; padding-bottom: 12px; }
+        .ds-footer section h4 { font-size: 27px; line-height: 34px; }
+        .ds-footer section p { font-size: 15px; line-height: 25px; margin-bottom: 22px; }
+        /* Tap targets */
+        .ds-contact-list { display: block; gap: 0; }
+        .ds-contact-list li { margin-bottom: 0; }
+        .ds-contact-list a { font-size: 15px; display: block; padding: 11px 0; }
+        .ds-copyright { font-size: 12px; display: block; padding-top: 18px; }
+      }
+
+      @media (max-width: 360px) {
+        .ds-banner section h1 { font-size: 24px; line-height: 32px; }
+        .ds-numbervalulist { grid-template-columns: 1fr; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      }
     </style>
     <title>Shaun Dickinson, Network &amp; Infrastructure Systems Engineer</title>
   </head>
